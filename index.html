@@ -15,7 +15,7 @@
       padding: 0;
       color: #333;
       transition: background-color 0.3s, color 0.3s ease-in-out; /* Pentru modul întunecat */
-          }
+    }
 
     body::before {
       content: "";
@@ -78,10 +78,14 @@
       width: 100%;
       transition: background-color 0.3s, transform 0.3s ease;
     }
+    .menu-item.active {
+    background-color: #FFCC00; /* Dunkelgelb */
+    color: #333;              /* Dunklerer Text */
+    }
 
     .menu-item:hover {
      background-color: #002244;
-     transform: translateX(5px); /* Leicht nach rechts verschieben */
+     transform: translateX(5px) scale(1.15); /* Leicht nach rechts verschieben + vergrößern */
     }
 
     .content-container {
@@ -115,6 +119,14 @@
       display: block;
     }
 
+     /* Stil pentru h3 */
+    h3 {
+      font-weight: bold;
+      text-transform: uppercase;
+      color: #003366;
+    }
+
+
     /* Buton modul întunecat */
     .dark-mode-toggle {
       position: absolute;
@@ -132,10 +144,13 @@
 
     body.dark-mode .dark-mode-toggle {
       background-color: #1a1a1a;
+
     }
 
     .dark-mode-toggle:hover {
       background-color: #23272b;
+      color: #FFD700; /* Textfarbe wird gold beim Hover */
+      transform: scale(1.1); /* Vergrößert den Button leicht beim Hovern */
     }
 
     /* Stiluri pentru dispozitive mobile */
@@ -201,12 +216,12 @@
       <div class="menu-item" onclick="showDescription('kosten')">MPU KOSTEN PRÜFUNG UND VORBEREITUNG</div>
       <div class="menu-item" onclick="showDescription('leistungstests')">LEISTUNGSTESTS</div>
       <div class="menu-item" onclick="showDescription('mpu-qa')">MPU-APP: FRAGEN UND ANTWORTEN</div>
-      <div class="menu-item" onclick="showDescription('ki-assistent')">KI ASSISTENT</div>
       <div class="menu-item" onclick="showDescription('promille-rechner')">PROMILLE RECHNER</div>
       <div class="menu-item" onclick="showDescription('mpu-quiz')">MPU QUIZ</div>
       <div class="menu-item" onclick="showDescription('gutachtersimulator')">MPU SIMULATOR</div>
       <div class="menu-item" onclick="showDescription('checkliste')">MPU - CHECKLISTE</div>
       <div class="menu-item" onclick="showDescription('frageboegen')">MPU-FRAGEBÖGEN</div>
+      <div class="menu-item" onclick="showDescription('ki-assistent')">KI ASSISTENT</div>
     </div>
 
     <div class="content-container">
@@ -228,6 +243,7 @@
       <div class="description" id="kosten-description">
         <h3>MPU Kosten Prüfung und Vorbereitung</h3>
         <p>Details zu den Kosten der MPU sowie der Vorbereitung findest du hier.</p>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/bUFjK54oz3c?si=vnVMJUhSd2KGaERJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
       </div>
       <div class="description" id="leistungstests-description">
@@ -264,7 +280,7 @@
       </div>
       <div class="description" id="mpu-quiz-description">
         <h3>MPU Quiz</h3>
-        <button class="button" onclick="window.open('https://zaha175.github.io/MPUQUIZ/', '_blank')">QUIZ STARTEN</button>
+        <button class="button" onclick="window.open('https://zaha175.github.io/QUIZSUPERTOLL/', '_blank')">QUIZ STARTEN</button>
       </div>
       <div class="description" id="gutachtersimulator-description">
         <h3>MPU Simulator</h3>
@@ -283,22 +299,38 @@
   </main>
 
   <script>
-    function showDescription(category) {
-      // Alle Beschreibungen ausblenden
-      let descriptions = document.querySelectorAll('.description');
-      descriptions.forEach(description => {
-        description.classList.remove('active');
-      });
-      // Die entsprechende Beschreibung einblenden, falls vorhanden
-      let description = document.getElementById(`${category}-description`);
-      if (description) {
-        description.classList.add('active');
-      }
-    }
+   function showDescription(category) {
+  let descriptions = document.querySelectorAll('.description');
+  descriptions.forEach(description => {
+    description.classList.remove('active');
+  });
+  let description = document.getElementById(`${category}-description`);
+  if (description) {
+    description.classList.add('active');
+  }
 
-    function toggleDarkMode() {
-      document.body.classList.toggle('dark-mode');
-    }
+  let menuItems = document.querySelectorAll('.menu-item');
+  menuItems.forEach(item => {
+    item.classList.remove('active'); // Entfernt die Klasse von allen
+  });
+  let activeMenuItem = document.querySelector(`.menu-item[onclick="showDescription('${category}')"]`);
+  if (activeMenuItem) {
+    activeMenuItem.classList.add('active'); // Fügt die Klasse dem aktuellen hinzu
+  }
+}
+
+function toggleDarkMode() {
+  document.body.classList.toggle('dark-mode');
+  localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+}
+
+// Lade Dark-Mode beim Start
+window.onload = () => {
+  if (localStorage.getItem('darkMode') === 'true') {
+    document.body.classList.add('dark-mode');
+  }
+};
+
   </script>
 
 </body>
