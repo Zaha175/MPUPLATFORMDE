@@ -8,202 +8,217 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
  </head>
 <style>
-    /* Stiluri generale */
-    body {
-      font-family: 'Roboto', sans-serif;
-      margin: 0;
-      padding: 0;
-      color: #333;
-      transition: background-color 0.3s, color 0.3s ease-in-out; /* Pentru modul întunecat */
-    }
+     /* Stiluri generale */
+   body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s ease-in-out;
+            display: flex; /* Für vertikale Zentrierung */
+            flex-direction: column;
+            min-height: 100vh; /* Mindesthöhe für den Viewport */
+        }
 
-    body::before {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background-image: url('https://i.imgur.com/IyXnm6Y.jpeg');
-      background-size: cover;
-      background-position: center;
-      z-index: -1;
-      transition: opacity 0.3s ease-in-out;
-      opacity: 1;
-    }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://i.imgur.com/IyXnm6Y.jpeg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+            opacity: 1;
+            transition: opacity 0.3s ease-in-out;
+        }
 
-    body.dark-mode {
-      background-color: #121212;
-      color: #e0e0e0;
-    }
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
 
-    body.dark-mode::before {
-      opacity: 0.3; /* Întunecarea imaginii de fundal */
-    }
+        body.dark-mode::before {
+            opacity: 0.3;
+        }
 
-    header {
-      background-color: #003366;
-      color: #fff;
-      padding: 20px;
-      text-align: center;
-      font-size: 1.5rem;
-      transition: background-color 0.3s; /* Pentru modul întunecat */
-    }
+        /* Container für die gesamte Seite */
+        .container {
+            width: 90%; /* oder feste Breite, z.B. 1200px */
+            max-width: 1400px;
+            margin: 0 auto; /* Zentriert horizontal */
+            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
+            display: flex;
+            flex-direction: column;
+        }
 
-    body.dark-mode header {
-      background-color: #1a1a1a;
-    }
+        header {
+            background-color: #003366;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+            transition: background-color 0.3s;
+        }
 
-    main {
-      display: flex;
-      flex-direction: row;
-      gap: 20px;
-      padding: 20px;
-    }
+        body.dark-mode header {
+            background-color: #1a1a1a;
+        }
 
-    .menu-container {
-      width: 300px;
-    }
+        main {
+            display: flex;
+            gap: 20px;
+            padding: 20px;
+            flex-grow: 1; /* Wichtig für die vertikale Verteilung */
+        }
 
-    .menu-item {
-      padding: 15px;
-      background-color: #003366;
-      transform: translateX(5px); /* Verschiebt das Element leicht nach rechts */
-      color: #fff;
-      border: none;
-      border-radius: 5px;
-      margin-bottom: 10px;
-      cursor: pointer;
-      font-weight: bold;
-      width: 100%;
-      transition: background-color 0.3s, transform 0.3s ease;
-    }
-    .menu-item.active {
-    background-color: #FFCC00; /* Dunkelgelb */
-    color: #333;              /* Dunklerer Text */
-    }
+        .menu-container {
+            width: 300px; /* etwas schmaler */
+        }
 
-    .menu-item:hover {
-     background-color: #002244;
-     transform: translateX(5px) scale(1.15); /* Leicht nach rechts verschieben + vergrößern */
-    }
+        .menu-item {
+            padding: 15px 20px; /* etwas weniger Padding */
+            background-color: #003366;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            margin-bottom: 10px; /* etwas weniger Abstand */
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
 
-    .content-container {
-      flex-grow: 1;
-      display: flex;
-      justify-content: flex-start;
-      padding-left: 100px; /* Împinge conținutul mai spre dreapta */
-      align-items: flex-start; /* Ajustează alinierea la înălțimea primului buton */
-    }
+        .menu-item.active {
+            background-color: #FFCC00;
+            color: #333;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transform: scale(1.05); /* weniger stark vergrößern */
+        }
 
-    .description {
-      background-color: #ffffcc;
-      padding: 40px; /* Face spațiul interior mai mare */
-      border: 1px solid #ccc;
-      border-radius: 10px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      margin-top: 10px;
-      display: none;
-      max-width: 800px;
-      transition: background-color 0.3s, color 0.3s, border-color 0.3s; /* Pentru modul întunecat */
-    }
+        .menu-item:hover {
+            background-color: #002244;
+            transform: scale(1.05); /* weniger stark vergrößern */
+        }
 
-    body.dark-mode .description {
-      background: #1e1e1e;
-      border-color: #444;
-      color: #e0e0e0;
-    }
+        .content-container {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column; /* Inhalte untereinander anordnen */
+            align-items: center; /* Zentriert horizontal */
+        }
 
-    .description.active {
-      display: block;
-    }
+        .description {
+            background-color: #ffffcc;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px; /* Abstand nach unten */
+            display: none;
+            width: 100%;
+            max-width: 800px; /* maximale Breite */
+            box-sizing: border-box; /* Padding wird in Breite einbezogen */
+            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+        }
 
-     /* Stil pentru h3 */
-    h3 {
-      font-weight: bold;
-      text-transform: uppercase;
-      color: #003366;
-    }
+        body.dark-mode .description {
+            background: #1e1e1e;
+            border-color: #444;
+            color: #e0e0e0;
+        }
 
+        .description.active {
+            display: block;
+        }
 
-    /* Buton modul întunecat */
-    .dark-mode-toggle {
-      position: absolute;
-      top: 10px;
-      right: 10px;
-      background-color: #343a40;
-      color: #fff;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      text-transform: uppercase; /* Text cu majuscule */
-    }
+        .dark-mode-toggle {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #343a40;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-transform: uppercase;
+        }
 
-    body.dark-mode .dark-mode-toggle {
-      background-color: #1a1a1a;
+        body.dark-mode .dark-mode-toggle {
+            background-color: #1a1a1a;
+        }
 
-    }
+        .dark-mode-toggle:hover {
+            background-color: #23272b;
+            color: #FFD700;
+            transform: scale(1.1);
+        }
 
-    .dark-mode-toggle:hover {
-      background-color: #23272b;
-      color: #FFD700; /* Textfarbe wird gold beim Hover */
-      transform: scale(1.1); /* Vergrößert den Button leicht beim Hovern */
-    }
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 400px;
+        }
 
-    /* Stiluri pentru dispozitive mobile */
-    @media (max-width: 768px) {
-      main {
-        flex-direction: column;
-      }
+        .button {
+            width: 100%;
+            padding: 15px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            background-color: #002244;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            box-sizing: border-box; /* Padding wird in Breite einbezogen */
+        }
 
-      .menu-container {
-        width: 100%;
-      }
+        .button:hover {
+            background-color: #001122;
+            transform: scale(1.05); /* weniger stark vergrößern */
+        }
 
-      .menu-item {
-        margin-bottom: 5px;
-      }
+        iframe {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            max-width: 800px; /* Maximale Breite für das Iframe */
+            margin-bottom: 20px;
+        }
 
-      .description {
-        width: 90%;
-      }
-    }
+        /* Media Queries */
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
 
-    /* Stiluri buton */
-    .button-container {
-      display: flex;
-      flex-direction: column; /* Buttons untereinander */
-      align-items: center; /* Zentriert die Buttons */
-      gap: 10px; /* Abstand zwischen den Buttons */
-      margin-top: 10px; /* Abstand nach oben */
-  }
+            .menu-container {
+                width: 100%;
+            }
 
-  .button {
-      padding: 10px 15px;
-      font-size: 16px;
-      font-weight: bold; /* Fettschrift */
-      border: none;
-      background-color: #002244; /* Dunkelblau */
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      transition: background-color 0.3s;
-      width: 300px; /* Einheitliche Breite */
-      text-align: center;
-  }
+            .content-container {
+                padding: 10px; /* Weniger Padding auf Mobilgeräten */
+                align-items: stretch; /* Inhalte füllen die Breite aus */
+            }
 
-  .button:hover {
-      background-color: #001122; /* Noch dunkleres Blau beim Hover */
-      transform: scale(1.15); /* Vergrößert den Button leicht beim Hovern */
-    
-  iframe {
-  width: 100%;          /* Breite auf 100% setzen */
-  height: auto;         /* Höhe automatisch anpassen */
-  aspect-ratio: 16 / 9; /* Seitenverhältnis 16:9 */ 
-  }
+            .description {
+                width: 100%;
+            }
+
+            .button-container{
+              max-width: 100%;
+            }
+        }
+  
   </style>
 <body>
 
