@@ -6,224 +6,332 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>MPU Plattform - Prototyp</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
- </head>
-<style>
-     /* Stiluri generale */
-   body {
-            font-family: 'Roboto', sans-serif;
-            margin: 0;
-            color: #333;
-            transition: background-color 0.3s, color 0.3s ease-in-out;
-            display: flex; /* Für vertikale Zentrierung */
-            flex-direction: column;
-            min-height: 100vh; /* Mindesthöhe für den Viewport */
-        }
+  <style>
+    /* Stiluri generale */
+    body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      color: #333;
+      transition: background-color 0.3s, color 0.3s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        body::before {
-            content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: url('https://i.imgur.com/IyXnm6Y.jpeg');
-            background-size: cover;
-            background-position: center;
-            z-index: -1;
-            opacity: 1;
-            transition: opacity 0.3s ease-in-out;
-        }
+    body::before {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-image: url('https://i.imgur.com/IyXnm6Y.jpeg');
+      background-size: cover;
+      background-position: center;
+      z-index: -1;
+      opacity: 1;
+      transition: opacity 0.3s ease-in-out;
+    }
 
-        body.dark-mode {
-            background-color: #121212;
-            color: #e0e0e0;
-        }
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
 
-        body.dark-mode::before {
-            opacity: 0.3;
-        }
+    body.dark-mode::before {
+      opacity: 0.3;
+    }
 
-        /* Container für die gesamte Seite */
-        .container {
-            width: 90%; /* oder feste Breite, z.B. 1200px */
-            max-width: 1400px;
-            margin: 0 auto; /* Zentriert horizontal */
-            flex-grow: 1; /* Nimmt verfügbaren Platz ein */
-            display: flex;
-            flex-direction: column;
-        }
+    /* Container für die gesamte Seite */
+    .container {
+      width: 90%;
+      max-width: 1400px;
+      margin: 0 auto;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+    }
 
-        header {
-            background-color: #003366;
-            color: #fff;
-            padding: 20px;
-            text-align: center;
-            font-size: 1.5rem;
-            transition: background-color 0.3s;
-        }
+    header {
+      background-color: #003366;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 1.5rem;
+      transition: background-color 0.3s;
+    }
 
-        body.dark-mode header {
-            background-color: #1a1a1a;
-        }
+    body.dark-mode header {
+      background-color: #1a1a1a;
+    }
 
-        main {
-            display: flex;
-            gap: 20px;
-            padding: 20px;
-            flex-grow: 1; /* Wichtig für die vertikale Verteilung */
-        }
+    main {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      flex-grow: 1;
+    }
 
-        .menu-container {
-            width: 300px; /* etwas schmaler */
-        }
+    .menu-container {
+      width: 300px;
+    }
 
-        .menu-item {
-            padding: 15px 20px; /* etwas weniger Padding */
-            background-color: #003366;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            margin-bottom: 10px; /* etwas weniger Abstand */
-            cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            width: 100%;
-            text-align: center;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+    .menu-item {
+      padding: 15px 20px;
+      background-color: #003366;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 10px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+      width: 100%;
+      text-align: center;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-        .menu-item.active {
-            background-color: #FFCC00;
-            color: #333;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            transform: scale(1.05); /* weniger stark vergrößern */
-        }
+    .menu-item.active {
+      background-color: #FFCC00;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      transform: scale(1.05);
+    }
 
-        .menu-item:hover {
-            background-color: #002244;
-            transform: scale(1.05); /* weniger stark vergrößern */
-        }
+    .menu-item:hover {
+      background-color: #002244;
+      transform: scale(1.05);
+    }
 
-        .content-container {
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column; /* Inhalte untereinander anordnen */
-            align-items: center; /* Zentriert horizontal */
-        }
+    .content-container {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-        .description {
-            background-color: #ffffcc;
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px; /* Abstand nach unten */
-            display: none;
-            width: 100%;
-            max-width: 800px; /* maximale Breite */
-            box-sizing: border-box; /* Padding wird in Breite einbezogen */
-            transition: background-color 0.3s, color 0.3s, border-color 0.3s;
-        }
+    .description {
+      background-color: #ffffcc;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      margin-bottom: 20px;
+      display: none;
+      width: 100%;
+      max-width: 800px;
+      box-sizing: border-box;
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
 
-        body.dark-mode .description {
-            background: #1e1e1e;
-            border-color: #444;
-            color: #e0e0e0;
-        }
+    body.dark-mode .description {
+      background: #1e1e1e;
+      border-color: #444;
+      color: #e0e0e0;
+    }
 
-        .description.active {
-            display: block;
-        }
+    .description.active {
+      display: block;
+    }
 
-        .dark-mode-toggle {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: #343a40;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-            text-transform: uppercase;
-        }
+    .dark-mode-toggle {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #343a40;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      text-transform: uppercase;
+    }
 
-        body.dark-mode .dark-mode-toggle {
-            background-color: #1a1a1a;
-        }
+    body.dark-mode .dark-mode-toggle {
+      background-color: #1a1a1a;
+    }
 
-        .dark-mode-toggle:hover {
-            background-color: #23272b;
-            color: #FFD700;
-            transform: scale(1.1);
-        }
+    .dark-mode-toggle:hover {
+      background-color: #23272b;
+      color: #FFD700;
+      transform: scale(1.1);
+    }
 
-        .button-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            max-width: 400px;
-        }
+    .button-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 100%;
+      max-width: 400px;
+    }
 
-        .button {
-            width: 100%;
-            padding: 15px;
-            font-size: 1rem;
-            font-weight: bold;
-            border: none;
-            background-color: #002244;
-            color: white;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            box-sizing: border-box; /* Padding wird in Breite einbezogen */
-        }
+    .button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1rem;
+      font-weight: bold;
+      border: none;
+      background-color: #002244;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s, transform 0.2s;
+      box-sizing: border-box;
+    }
 
-        .button:hover {
-            background-color: #001122;
-            transform: scale(1.05); /* weniger stark vergrößern */
-        }
+    .button:hover {
+      background-color: #001122;
+      transform: scale(1.05);
+    }
 
-        iframe {
-            width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
-            max-width: 800px; /* Maximale Breite für das Iframe */
-            margin-bottom: 20px;
-        }
+    iframe {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      max-width: 800px;
+      margin-bottom: 20px;
+    }
 
-        /* Media Queries */
-        @media (max-width: 768px) {
-            main {
-                flex-direction: column;
-            }
+    /* Media Queries */
+    @media (max-width: 768px) {
+      main {
+        flex-direction: column;
+      }
 
-            .menu-container {
-                width: 100%;
-            }
+      .menu-container {
+        width: 100%;
+      }
 
-            .content-container {
-                padding: 10px; /* Weniger Padding auf Mobilgeräten */
-                align-items: stretch; /* Inhalte füllen die Breite aus */
-            }
+      .content-container {
+        padding: 10px;
+        align-items: stretch;
+      }
 
-            .description {
-                width: 100%;
-            }
+      .description {
+        width: 100%;
+      }
 
-            .button-container{
-              max-width: 100%;
-            }
-        }
-  
+      .button-container {
+        max-width: 100%;
+      }
+    }
+
+    /* Chatbot Widget */
+    #chatbot-widget {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    #chatbot-toggle {
+      background-color: #003366;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      font-size: 14px;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    #chatbot-toggle:hover {
+      background-color: #002244;
+      transform: scale(1.1);
+    }
+
+    #chatbot-container {
+      display: none;
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      width: 350px;
+      height: 500px;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+    }
+
+    #chatbot-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 10px;
+    }
+
+    /* Chatbot Interface */
+    #chatbot-container {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 350px;
+      height: 500px;
+      position: fixed;
+      bottom: 70px;
+      right: 20px;
+      z-index: 9999;
+    }
+
+    #chat-response {
+      width: 100%;
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 10px;
+      margin-bottom: 10px;
+      background: #fff;
+      color: #333;
+    }
+
+    #chat-input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #send-btn {
+      width: 100%;
+      padding: 10px;
+      background-color: #003366;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    #send-btn:hover {
+      background-color: #002244;
+    }
   </style>
+</head>
+
 <body>
 
   <header>MPU PLATFORM</header>
   <button class="dark-mode-toggle" onclick="toggleDarkMode()">Dark Mode</button>
+
+  <div id="chatbot-widget">
+    <button id="chatbot-toggle">🤖 Chatbot starten</button>
+    <div id="chatbot-container">
+      <div id="chat-response">Willkommen beim Chatbot!</div>
+      <input type="text" id="chat-input" placeholder="Schreibe eine Nachricht...">
+      <button id="send-btn">Senden</button>
+    </div>
+  </div>
 
   <main>
     <div class="menu-container">
@@ -242,8 +350,9 @@
     <div class="content-container">
       <div class="description" id="ablauf-description">
         <h3>Ablauf der MPU</h3>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/unYcOXwR0mw?si=1MlxgNbx0Oni866o" title="YouTube video player" frameborder="0" allow="accelerometer;
-        autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/unYcOXwR0mw?si=1MlxgNbx0Oni866o"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <ul>
           <li>Aufnahme (10 Minuten), Vorlage der Abstinenzbelege und Bescheinigung für die Vorbereitung.</li>
           <li>Ausfüllen der Fragebögen (30 Minuten)</li>
@@ -251,38 +360,53 @@
           <li>Reaktionstests (20 Minuten)</li>
           <li>Psychologische Begutachtung (60 Minuten)</li>
         </ul>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/-rDeGHZdois?si=CCdAMZsJohBxcDf5" title="YouTube video player" frameborder="0" allow="accelerometer;
-        autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/-rDeGHZdois?si=CCdAMZsJohBxcDf5"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
         <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent')">KI ASSISTENT</button>
       </div>
       <div class="description" id="kosten-description">
         <h3>MPU Kosten Prüfung und Vorbereitung</h3>
         <p>Details zu den Kosten der MPU sowie der Vorbereitung findest du hier.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/bUFjK54oz3c?si=vnVMJUhSd2KGaERJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/bUFjK54oz3c?si=vnVMJUhSd2KGaERJ"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
         <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
       </div>
       <div class="description" id="leistungstests-description">
         <h3>Leistungstests</h3>
         <p>Hier findest du alle Leistungstests wie Reaktionstests und Konzentrationsübungen.</p>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/vcAJC0gfvRc?si=9jdXUb4B0ck9VKOA"
-          title="YouTube video player" frameborder="0" allow="accelerometer;
-        autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
-        <button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">REAKTIONSTESTS AUFRUFEN</button>
+        <ul>
+          <p><button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">REAKTIONSTESTS AUFRUFEN</button></p>
+          <p><button class="button" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">FIGUREN TEST</button></p>
+          <p><button class="button" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">VERKEHRSITUATIONSTEST</button></p>
+        </ul>
       </div>
       <div class="description" id="checkliste-description">
         <h3>MPU - Checkliste</h3>
         <p>Schritt für Schritt zur erfolgreichen MPU: Nutzen Sie unsere Checkliste, um den Überblick zu behalten und sich optimal vorzubereiten.</p>
         <iframe width="560" height="315" src="https://www.youtube.com/embed/E9TID9YfLyY?si=THFP_EOaSzZsmfJz"
-          title="YouTube video player" frameborder="0" allow="accelerometer;
-        autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
           allowfullscreen></iframe>
+        <h3>KI-Assistent</h3>
+        <p>Der KI-Assistent ist bereit, dir bei allen MPU-Fragen zu helfen.</p>
+        <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
       </div>
       <div class="description" id="mpu-qa-description">
         <h3>MPU-App Fragen und Antworten</h3>
         <p>Fragen und Antworten zur Vorbereitung.</p>
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/yo7Fg_cT8BI?si=7cVKATzN449vilJR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-       </ul>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/yo7Fg_cT8BI?si=7cVKATzN449vilJR"
+          title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <h3>Controlliertes Trinken</h3>
+        </ul>
+        <p><button class="button" onclick="window.open('https://zaha175.github.io/CONTROLLIERTES-TRINKEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN</button><p>
+         </ul>
+         <h3>Abstinenz</h3>
+        </ul>
         <p><button class="button" onclick="window.open('https://zaha175.github.io/FRAGENUNDANTWORTEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN</button><p>
         <p><button class="button" onclick="window.open('https://zaha175.github.io/FRAGUNDANTWERKL-RUNGEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN ERKLÄRT</button><p>
         </ul>
@@ -293,18 +417,29 @@
         <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
       </div>
       <div class="description" id="promille-rechner-description">
-        <h3>Promille Rechner</h3>
-        <button class="button" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">RECHNER STARTEN</button>
+        <h3>Alkoholmenge und Promillerechner</h3>
+       </ul>
+       <p><button class="button" onclick="window.open('https://zaha175.github.io/MENGENACHPROMILLE/', '_blank')">Alkohlkonsumrechner mit Diagramm</button><p>
+       <p><button class="button" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">Promillerechner mit Diagramm</button><p>
+       </ul>
       </div>
       <div class="description" id="mpu-quiz-description">
-        <h3>MPU Quiz</h3>
-        <button class="button" onclick="window.open('https://zaha175.github.io/QUIZSUPERTOLL/', '_blank')">QUIZ STARTEN</button>
+        <h3>MPU Quiz und Spiele</h3>
+        </ul>
+          <p>MPU QUIZ <p>
+         <p><button class="button" onclick="window.open('https://zaha175.github.io/QUIZ1/', '_blank')">QUIZ1 STARTEN</button> <p>
+         <p> <button class="button" onclick="window.open('https://zaha175.github.io/QUIZ2/', '_blank')">QUIZ2 STARTEN</button> <p> 
+        <p> <button class="button" onclick="window.open('https://zaha175.github.io/QUIZSUPERTOLL/', '_blank')">QUIZ3 STARTEN</button> <p>
+        </ul>
+        </ul>
+        <p>MPU SPIELE <p>
+        </ul>
       </div>
       <div class="description" id="gutachtersimulator-description">
         <h3>MPU Simulator</h3>
         <p>Simulation eines MPU-Gesprächs.</p>
       </div>
-       <div class="description" id="frageboegen-description">
+      <div class="description" id="frageboegen-description">
         <h3>MPU Fragebögen</h3>
         <p>Übungen und Fragebögen für die MPU.</p>
         <button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">FRAGEBÖGEN ANZEIGEN</button>
@@ -315,9 +450,8 @@
       </div>
     </div>
   </main>
-
-  <script>
-   function showDescription(category) {
+<script>
+      function showDescription(category) {
   let descriptions = document.querySelectorAll('.description');
   descriptions.forEach(description => {
     description.classList.remove('active');
@@ -347,10 +481,21 @@ window.onload = () => {
   if (localStorage.getItem('darkMode') === 'true') {
     document.body.classList.add('dark-mode');
   }
+  
+
+  // Chatbot-Fenster öffnen/schließen
+    document.getElementById('chatbot-toggle').onclick = () => {
+      const container = document.getElementById('chatbot-container');
+      container.style.display = container.style.display === 'none' ? 'block' : 'none';
+      document.getElementById('chat-response').innerText = 'Der Chatbot ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.';
+    };
+
+    // Chatbot deaktiviert – Platzhalterantwort
+    document.getElementById('send-btn').onclick = () => {
+      document.getElementById('chat-response').innerText = 'Der Chatbot ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.';
+     }
 };
-
-  </script>
-
+</script>
 </body>
 
 </html>
