@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MPU Plattform - Prototyp</title>
+    <meta name="description" content="MPU Plattform zur Vorbereitung auf die Medizinisch-Psychologische Untersuchung. Mit Tests, Quiz, Rechner und KI-Assistent.">
+    <meta name="keywords" content="MPU, Medizinisch-Psychologische Untersuchung, Vorbereitung, Test, Quiz, Promillerechner, KI-Assistent">
+    <meta name="robots" content="index, follow">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         /* Stiluri generale */
         body {
@@ -16,7 +20,7 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
-            position: relative; /* Für Dark-Mode-Layer */
+            position: relative;
         }
 
         body::before {
@@ -181,6 +185,10 @@
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
             box-sizing: border-box;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
         }
 
         .button:hover {
@@ -188,12 +196,17 @@
             transform: scale(1.05);
         }
 
+        .button i {
+            font-size: 0.8rem;
+        }
+
         iframe {
             width: 100%;
-            height: auto;
-            aspect-ratio: 16 / 9;
+            height: 400px;
             max-width: 800px;
             margin-bottom: 20px;
+            border: none;
+            overflow: hidden;
         }
 
         /* Media Queries */
@@ -217,6 +230,10 @@
 
             .button-container {
                 max-width: 100%;
+            }
+
+            iframe {
+                height: 300px; /* Anpassung der iframe-Höhe auf kleineren Bildschirmen */
             }
         }
 
@@ -341,7 +358,7 @@
             <div class="content-container">
                 <div class="description" id="ablauf-description">
                     <h3>Ablauf der MPU</h3>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/unYcOXwR0mw?si=1MlxgNbx0Oni866o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    <iframe src="https://www.youtube.com/embed/unYcOXwR0mw?si=1MlxgNbx0Oni866o" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                     <ul>
                         <li>Aufnahme (10 Minuten), Vorlage der Abstinenzbelege und Bescheinigung für die Vorbereitung.</li>
                         <li>Ausfüllen der Fragebögen (30 Minuten)</li>
@@ -349,79 +366,93 @@
                         <li>Reaktionstests (20 Minuten)</li>
                         <li>Psychologische Begutachtung (60 Minuten)</li>
                     </ul>
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/-rDeGHZdois?si=CCdAMZsJohBxcDf5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                    <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent')">KI ASSISTENT</button>
+                    <iframe src="https://www.youtube.com/embed/-rDeGHZdois?si=CCdAMZsJohBxcDf5" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI ASSISTENT <i class="fas fa-external-link-alt"></i></button>
                 </div>
                 <div class="description" id="kosten-description">
                     <h3>MPU Kosten Prüfung und Vorbereitung</h3>
                     <p>Details zu den Kosten der MPU sowie der Vorbereitung findest du hier.</p>
-                     <iframe width="560" height="315" src="https://www.youtube.com/embed/bUFjK54oz3c?si=vnVMJUhSd2KGaERJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                      <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
+                     <iframe src="https://www.youtube.com/embed/bUFjK54oz3c?si=vnVMJUhSd2KGaERJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                      <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
                  </div>
                  <div class="description" id="leistungstests-description">
                      <h3>Leistungstests</h3>
                       <p>Hier findest du alle Leistungstests wie Reaktionstests und Konzentrationsübungen.</p>
-                      <iframe width="560" height="315" src="https://www.youtube.com/embed/vcAJC0gfvRc?si=9jdXUb4B0ck9VKOA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                      <iframe src="https://www.youtube.com/embed/vcAJC0gfvRc?si=9jdXUb4B0ck9VKOA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                        <ul>
-                         <p><button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">REAKTIONSTESTS AUFRUFEN</button></p>
-                         <p><button class="button" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">FIGUREN TEST</button></p>
-                         <p><button class="button" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">VERKEHRSITUATIONSTEST</button></p>
+                         <p><button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">REAKTIONSTESTS AUFRUFEN <i class="fas fa-external-link-alt"></i></button></p>
+                         <p>REAKTIONSTESTS:</p>
+                          
+                         <p>FIGURENVERGLEICHSTEST</p>
+                         <p><button class="button" onclick="window.open('https://zaha175.github.io/FIGURENVERGLEICHSTEST/', '_blank')">FIGURENVERGLEICHSTEST <i class="fas fa-external-link-alt"></i></button></p>
+
+                         <p>VERKEHRSITUATIONSTEST</p>
+                         <p><button class="button" onclick="window.open('https://zaha175.github.io/Verkehrssituationstext/', '_blank')">VERKEHRSITUATIONSTEST <i class="fas fa-external-link-alt"></i></button></p>
+
+                         <p>MERHFACHSITUATIONSTEST</p>
+                         <p><button class="button" onclick="window.open('https://zaha175.github.io/MERHFACHSITUATIONSTEST/', '_blank')">MERHFACHSITUATIONSTEST <i class="fas fa-external-link-alt"></i></button><p>
                        </ul>
                    </div>
                    <div class="description" id="checkliste-description">
                        <h3>MPU - Checkliste</h3>
                         <p>Schritt für Schritt zur erfolgreichen MPU: Nutzen Sie unsere Checkliste, um den Überblick zu behalten und sich optimal vorzubereiten.</p>
-                          <iframe width="560" height="315" src="https://www.youtube.com/embed/E9TID9YfLyY?si=THFP_EOaSzZsmfJz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                          <iframe src="https://www.youtube.com/embed/xmXUXZ81PxA?si=SINLc6pc2RB6XelJ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                          <h3>KI-Assistent</h3>
                         <p>Der KI-Assistent ist bereit, dir bei allen MPU-Fragen zu helfen.</p>
-                        <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
+                        <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
                   </div>
                    <div class="description" id="mpu-qa-description">
                        <h3>MPU-App Fragen und Antworten</h3>
                         <p>Fragen und Antworten zur Vorbereitung.</p>
-                           <iframe width="560" height="315" src="https://www.youtube.com/embed/yo7Fg_cT8BI?si=7cVKATzN449vilJR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                           <iframe src="https://www.youtube.com/embed/yo7Fg_cT8BI?si=7cVKATzN449vilJR" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                           <h3>Controlliertes Trinken</h3>
                           </ul>
-                          <p><button class="button" onclick="window.open('https://zaha175.github.io/CONTROLLIERTES-TRINKEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN</button><p>
+                          <p><button class="button" onclick="window.open('https://zaha175.github.io/CONTROLLIERTES-TRINKEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN <i class="fas fa-external-link-alt"></i></button><p>
                            </ul>
                            <h3>Abstinenz</h3>
                           </ul>
-                           <p><button class="button" onclick="window.open('https://zaha175.github.io/FRAGENUNDANTWORTEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN</button><p>
-                           <p><button class="button" onclick="window.open('https://zaha175.github.io/FRAGUNDANTWERKL-RUNGEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN ERKLÄRT</button><p>
+                           <p><button class="button" onclick="window.open('https://zaha175.github.io/FRAGENUNDANTWORTEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN <i class="fas fa-external-link-alt"></i></button><p>
+                           <p><button class="button" onclick="window.open('https://zaha175.github.io/FRAGUNDANTWERKL-RUNGEN/', '_blank')">MPU APP: FRAGEN UND ANTWORTEN ERKLÄRT <i class="fas fa-external-link-alt"></i></button><p>
                            </ul>
                    </div>
                   <div class="description" id="ki-assistent-description">
                        <h3>KI-Assistent</h3>
                        <p>Der KI-Assistent ist bereit, dir bei allen MPU-Fragen zu helfen.</p>
-                       <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN</button>
+                       <button class="button" onclick="window.open('https://chatgpt.com/g/g-675ae9d9e02c819197d84b01adf301ee-mpuassistent', '_blank')">KI-ASSISTENT ÖFFNEN <i class="fas fa-external-link-alt"></i></button>
                   </div>
                    <div class="description" id="promille-rechner-description">
                       <h3>Alkoholmenge und Promillerechner</h3>
                      </ul>
-                     <p><button class="button" onclick="window.open('https://zaha175.github.io/MENGENACHPROMILLE/', '_blank')">Alkohlkonsumrechner mit Diagramm</button><p>
-                      <p><button class="button" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">Promillerechner mit Diagramm</button><p>
+                     <p>Alkohlkonsumrechner mit Diagramm</p>
+                     <iframe src="https://zaha175.github.io/MENGENACHPROMILLE/" ></iframe> 
+ 
+                     <p>Promillerechner mit Diagramm</p>
+                     <p><button class="button" onclick="window.open('https://zaha175.github.io/PROMILLERECHNERDE/', '_blank')">Promillerechner mit Diagramm <i class="fas fa-external-link-alt"></i></button><p>
                      </ul>
                   </div>
                   <div class="description" id="mpu-quiz-description">
                      <h3>MPU Quiz und Spiele</h3>
                        </ul>
-                         <p>MPU QUIZ <p>
-                        <p><button class="button" onclick="window.open('https://zaha175.github.io/QUIZ1/', '_blank')">QUIZ1 STARTEN</button> <p>
-                        <p> <button class="button" onclick="window.open('https://zaha175.github.io/QUIZ2/', '_blank')">QUIZ2 STARTEN</button> <p>
-                       <p> <button class="button" onclick="window.open('https://zaha175.github.io/QUIZSUPERTOLL/', '_blank')">QUIZ3 STARTEN</button> <p>
-                       </ul>
-                       </ul>
+                        <p>MPU QUIZ <p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/QUIZ1/', '_blank')">QUIZ1 STARTEN <i class="fas fa-external-link-alt"></i></button> <p>
+
+                        <p>QUIZ2</p>
+                        <p><button class="button" onclick="window.open('https://zaha175.github.io/QUIZ2/', '_blank')">QUIZ2 STARTEN <i class="fas fa-external-link-alt"></i></button> <p> 
+
+                        <p>QUIZ3</p>
+                        <iframe src="https://zaha175.github.io/QUIZSUPERTOLL/" ></iframe> 
+                        </ul>
                      <p>MPU SPIELE <p>
                      </ul>
                    </div>
                    <div class="description" id="gutachtersimulator-description">
                       <h3>MPU Simulator</h3>
                       <p>Simulation eines MPU-Gesprächs.</p>
-                 </div>
+                  </div>
                    <div class="description" id="frageboegen-description">
                     <h3>MPU Fragebögen</h3>
                      <p>Übungen und Fragebögen für die MPU.</p>
-                     <button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">FRAGEBÖGEN ANZEIGEN</button>
+                     <button class="button" onclick="window.open('https://gamma.app/docs/MPUNEUREAKTIONSTEST-79vwbbrski77oor', '_blank')">FRAGEBÖGEN ANZEIGEN <i class="fas fa-external-link-alt"></i></button>
                   </div>
                   <div class="description" id="header-description">
                   <h3>Willkommen bei der MPU PLATFORM</h3>
@@ -466,7 +497,7 @@
          document.getElementById('chatbot-toggle').onclick = () => {
                 const container = document.getElementById('chatbot-container');
                 container.style.display = container.style.display === 'none' ? 'flex' : 'none';
-                 document.getElementById('chat-response').innerText = 'Der Chatbot ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.';
+                document.getElementById('chat-response').innerText = 'Der Chatbot ist derzeit nicht verfügbar. Bitte versuchen Sie es später erneut.';
             };
 
             // Chatbot deaktiviert – Platzhalterantwort
